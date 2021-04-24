@@ -5,47 +5,43 @@ function getResult(a,b,c){
 
     if (disc < 0) {
         return x
+    } 
+    let firstArg, secondArg;
+    firstArg = (-b + Math.sqrt(disc)) / (2 * a);
+    secondArg = (-b - Math.sqrt(disc)) / (2 * a);
+
+    if (firstArg === secondArg) {
+        x = [firstArg];
     } else {
-        let firstArg, secondArg;
-        firstArg = (-b + Math.sqrt(disc)) / 2;
-        secondArg = (-b - Math.sqrt(disc)) / 2;
         x = [firstArg, secondArg];
-    }
-    
-    if (x[0] === x[1]) {
-        x.pop();
     }
 
     return x;
 }
 
 function getAverageMark(marks){
-    let avgSum = 0;
-    let averageMark;
+    let averageSum = 0;
+
     if (marks.length > 5) {
-        for (let i = marks.length; i > 5; i--) {
-            marks.pop();
-        }
+        marks.splice(5, marks.length - 5)
     } 
     if (marks.length === 0) {
-        averageMark = 0;
+        return 0;
     } else {
         for (let i = 0; i < marks.length; i++) {
-            avgSum += marks[i];
+            averageSum += marks[i];
         }
-        averageMark = avgSum / marks.length;
+        return averageSum / marks.length;
     }
-    return averageMark;
 }
 
 function askDrink(name,dateOfBirthday){
     let yearsOld = dateOfBirthday.getFullYear();
-    let now = new Date();
     let result;
-    if (now.getFullYear() - yearsOld >= 18) {
-        result = "Не желаете ли олд-фэшн, " + name + " ?";
+    if (new Date().getFullYear() - yearsOld >= 18) {
+        result = `Не желаете ли олд-фэшн, ${name}?`;
     } else {
-        result = "Сожалею, " + name + " , но я не могу вам продать алкоголь. Могу предложить вам замечательный клюквенный компот!";
+        result = `Сожалею, ${name}, но я не могу вам продать алкоголь. Могу предложить вам замечательный клюквенный компот!`;
     }
     return result;
 }
