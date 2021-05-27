@@ -76,22 +76,13 @@ function getAverageMark(marks) {
 
 function getPersonData(secretData) {
     let banditName = {} ;
-    if (secretData.aaa == 0) {
-        banditName.firstName = "Родриго";
-    }
-    if (secretData.aaa == 1) {
-        banditName.firstName = "Эмильо";
-    }
-    if (secretData.bbb == 0) {
-        banditName.lastName = "Родриго";
-    }
-    if (secretData.bbb == 1) {
-        banditName.lastName = "Эмильо";
-    }
+    banditName.firstName = !secretData.aaa ? "Родриго" : "Эмилио"
+    banditName.lastName = !secretData.bbb ? "Родриго" : "Эмилио"
+    
     return banditName;
 }
 
-console.log(getPersonData({
-    aaa: 1,
-    bbb: 0
-}))
+// console.log(getPersonData({
+//     aaa: 1,
+//     bbb: 0
+// }))
