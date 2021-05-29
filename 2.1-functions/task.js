@@ -75,14 +75,20 @@ function getAverageMark(marks) {
 //     )
 
 function getPersonData(secretData) {
-    let banditName = {} ;
-    banditName.firstName = !secretData.aaa ? "Родриго" : "Эмилио"
-    banditName.lastName = !secretData.bbb ? "Родриго" : "Эмилио"
-    
+    let banditName = {
+        firstName : secretData.aaa,
+        lastName : secretData.bbb
+    }
+    banditName.firstName = getDecodedValue(banditName.firstName);
+    banditName.lastName = getDecodedValue(banditName.lastName);
     return banditName;
 }
 
-// console.log(getPersonData({
-//     aaa: 1,
-//     bbb: 0
-// }))
+function getDecodedValue(secret) {
+    return secret = secret ? "Родриго" : "Эмилио";
+}
+
+console.log(getPersonData({
+    aaa: 1,
+    bbb: 0
+}))
