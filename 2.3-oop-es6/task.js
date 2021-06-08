@@ -110,13 +110,11 @@ class StudentLog {
     }
 
     addGrade(grade, subject) {
-        if (grade < 1 || grade > 5 || isNaN(grade)) {
-            this.lessonObj[subject] = [];
-            return `Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.` + "\n" + this.lessonObj[subject].length;
-        }
-
         if (!(subject in this.lessonObj)) {
             this.lessonObj[subject] = [];
+        }
+        if (grade < 1 || grade > 5 || isNaN(grade)) {
+            return `Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.` + "\n" + this.lessonObj[subject].length;
         }
 
         this.lessonObj[subject].push(grade)
@@ -132,17 +130,12 @@ class StudentLog {
         return avgScore / this.lessonObj[subject].length;
     }
     getTotalAverage() {
-        let avgScore = 0;
-        let allScores = [];
-        let allScoresSum = 0;
+        this.addGrade([] , "allScores");
         if (Object.keys(this.lessonObj).length > 0) {
             for (let i = 0; i < Object.keys(this.lessonObj).length; i++) {
-                allScores = allScores.concat(Object.values(this.lessonObj)[i]);
+                this.lessonObj.allScores = this.lessonObj.allScores.concat(Object.values(this.lessonObj)[i]);
             }
-            for (let i = 0; i < allScores.length; i++) {
-                allScoresSum += allScores[i];
-            }
-            return avgScore = allScoresSum / allScores.length;
+            return this.getAverageBySubject('allScores');
         }
     }
 }
