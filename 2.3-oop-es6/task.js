@@ -133,7 +133,11 @@ class StudentLog {
         this.addGrade([] , "allScores");
         if (Object.keys(this.lessonObj).length > 0) {
             for (let i = 0; i < Object.keys(this.lessonObj).length; i++) {
-                this.lessonObj.allScores = this.lessonObj.allScores.concat(Object.values(this.lessonObj)[i]);
+                if (Object.values(this.lessonObj)[i] == this.lessonObj.allScores) {
+                    i++;
+                } else {
+                    this.lessonObj.allScores = this.lessonObj.allScores.concat(Object.values(this.lessonObj)[i]);
+                }
             }
             return this.getAverageBySubject('allScores');
         }
